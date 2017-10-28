@@ -1,0 +1,176 @@
+
+
+	<!DOCTYPE html>
+	<html lang="en">
+		<head>
+
+		<meta name="viewport" content="width=device-width, user-scalable=no" />
+
+		<link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAGZJREFUeNq0k1EKwCAMQ839D52hsiHRVrd2Bf2I9NGGCJIlVAaAxpl60S5Am72CBzjdByvAWzMwAvjRP0yA21TxZan/AwivkOKBjm+9VcCYxCdx7CI3mh8kjbhMhbQo53ymSF0CDADd5Je3tdTDkgAAAABJRU5ErkJggg==" sizes="16x16">
+		<link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAH1JREFUeNrs10EOwCAIBED3/4+mPXkwqUC1lI14RplERYSItD8H0gAAaLFe6XTBnpcBsLpHoAXsPp2gAXx9L5EWEFqR7rzgAIylWitY1vgC8ADqFhTA0bC45qUETB8jK8QQ9+41jASYII+rK4mXO6JIQHXFh/2Mjv0dXwIMAJWTBdCrOtJUAAAAAElFTkSuQmCC" sizes="32x32">
+		<link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAS5JREFUeNrs3UEOAiEQBVEx3v/KeAIWJEB/yKutC0cr3VMZZ2LrvX9Qx9dXQAABIIAA1PAbvdBa2/3eafm19QOPatMEWEEEgAACkFZBD9fO7HE2E2AFgQACQIAKeqJ2ourIBFhBBIAAAnBRBbmRaGEdmQAriAAQQAACK0jtHKgjE2AFEQACCEBgBa1Jgsln0HbflZ12PCbACiIABBAAAggAAQSAAAJwkO3Xgg48cX/18ZgAAggAAQSAAAJAAAEggAAcpOy+oLRrMlXHaQKsIAJAAAEIrKDR6X/q9uJRRVRVx4H39aS8FQQCCAABt1dQVB0tS5Si2jEBVhAIIAAEPFBBJXVUiH/QsIJAAAEgQAUV1tHttWMCrCAQQAAISDvz7/4FCiaAABBAAAiI5C/AAOsjK+AXmG2zAAAAAElFTkSuQmCC" sizes="96x96">
+
+			<meta charset="utf-8">
+			<title>Simple Canvas RPG Game</title>
+			<link rel="stylesheet" type="text/css" href="gameStyle.css">
+
+			<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js">
+			</script>
+
+			<!-- Binding the window Except on certain ocassions -->
+			<script type="text/javascript">
+			$(function () {
+				var bindWindow = true;
+				
+					$(window).bind(
+			  			'touchmove',
+			   			function(e) {
+							if(bindWindow){
+			    				e.preventDefault();
+			    			}
+			  			}
+					);
+			
+				document.getElementById('settingsButtonToggle').addEventListener("click", function(event){
+					if(bindWindow){ bindWindow = false;}
+					else {bindWindow = true;}
+				});
+			})
+
+			</script>
+
+
+			<script src="http://code.jquery.com/jquery.min.js"></script>
+
+			<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+
+			
+
+			<script type="text/javascript">
+			$(function() {
+				$( ".drag" ).draggable({ 
+					revert: true, 
+					// containment: "#joystickHolder" 
+				});
+
+			});
+			</script>
+
+
+ 			
+
+			<!-- tooltip script -->
+	  		<script type="text/javascript">
+
+
+	$(document).ready(function() {
+
+	// Tooltip only Text
+	$('.masterTooltip').hover(function(){
+	        // Hover over code
+	        var title = $(this).attr('title');
+	        $(this).data('tipText', title).removeAttr('title');
+	        $('<p class="tooltip"></p>')
+	        .text(title)
+	        .appendTo('body')
+	        .fadeIn('slow');
+	}, function() {
+	        // Hover out code
+	        $(this).attr('title', $(this).data('tipText'));
+	        $('.tooltip').remove();
+	}).mousemove(function(e) {
+			var windowWidth = $(window).width(); 
+			if(e.pageX > (windowWidth/2) ){ //if mouse close to screen RIGHT
+				var mousex = e.pageX - 80; //Get X coordinates
+	        	var mousey = e.pageY - 10; //Get Y coordinates
+			}else{ //if mouse close to screen LEFT
+	        	var mousex = e.pageX; 
+	        	var mousey = e.pageY - 10; 
+	    	}
+	        $('.tooltip')
+	        .css({ top: mousey, left: mousex })
+	});
+	});
+	</script>
+
+		</head>
+		<body>
+
+			<div id="joystickHolder">
+				<div id="joystickUp" class="joystick" 
+				style="top:-10px; left:20px; color:#33CC33;">U</div>
+
+				<div id="joystickRight" class="joystick" 
+				style="right:-10px; top:20px; color:#CC0000;">R</div>
+
+				<div id="joystickDown" class="joystick"
+				style="left:20px; bottom:-10px; color:#0000FF;">D</div>
+
+				<div id="joystickLeft" class="joystick"
+				style="left:-10px; top:20px; color:#FF3399">L</div>
+			</div>
+
+			<a href='http://teenzombie.com' class="myButton">teenzombie.com</a>
+			
+			<div id="settingsToggleHolder" title="Settings &amp; Information" >
+				<a href="#" id="settingsButtonToggle" class="settingsToggle"> </a>
+				<p id="settingsOutput"></p>
+			</div>
+
+
+			<div id="gameOverMenuHolder">
+					<div id="gameOverMenu">
+						<h1 style="color:#ff0000;">GAME OVER</h1>
+						<a href='#' id="restartButtonToggle" class="Sbuttons">Restart Game!</a>
+					</div>	
+			</div>
+
+			<div id="settingsMenuHolder">
+					<div id="settingsMenu">
+						<h1>Settings</h1>
+							<a href='#' id="resetButtonToggle" class="Sbuttons">Reset Game!</a>
+						<br>
+						<p id="settingsText">
+							<br>W,A,S,D or Arrow Keys to control on desktops, and the D-pad on mobile or touch platforms.
+						</p>
+						<h1>About</h1>
+						<p id="settingsText">This game is being built by me, 
+							<a href='http://twitter.com/eyeofbri'>Brian McLendon!</a>
+							<br>It runs on HTML5 Canvas, a little Jquery, and help from a lot of awesome open source links.
+							<br></br>This project is is also open source! 
+							<br>Grab it from my Git <a href="https://github.com/eyeofbri"> @EyeOfBri </a>
+						</p>
+
+						<h1>Links</h1>
+						<p>
+							<ul class="linklist">
+								<li>Lost Decade Games: <a href="http://www.lostdecadegames.com/how-to-make-a-simple-html5-canvas-game/">How to make a Simple HTML5 Game</a></li>
+								<br>
+								<li>Dungeon Crawl Tiles: <a href="http://opengameart.org/content/dungeon-crawl-32x32-tiles">Open Source Roguelike Art</a></li>
+								<br>
+								<li>HTML 5 Rocks: <a href="http://www.html5rocks.com/en/tutorials/canvas/notearsgame/">No Tears Guide to HTML5 Games</a></li>
+							</ul>
+						</p>
+					</div> 
+			</div>
+
+			<div id="HeartsBox" title="Health" class="masterTooltip">
+				<div class="Htext" id="UI_HText"></div>
+			</div>
+
+		<!-- 	<div id="AttackBox" title="Attack" class="masterTooltip">
+				<div class="Atext" id="UI_AText"></div>
+			</div>
+
+			<div id="DefenseBox" title="Defense" class="masterTooltip">
+				<div class="Dtext" id="UI_DText"></div>
+			</div> -->
+
+			<script src="js/game.js"></script>
+
+			<div id="vignette"></div>
+
+
+
+		</body>
+	</html>
